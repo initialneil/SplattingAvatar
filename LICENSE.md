@@ -1,7 +1,6 @@
 SplattingAvatar
 ===========================  
 The code is released under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode) for Noncommercial use only. Any commercial use should get formal permission first.
-Gaussian-Splatting License  
 <br>
 
 Gaussian Splatting
