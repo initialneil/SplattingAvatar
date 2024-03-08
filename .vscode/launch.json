@@ -1,0 +1,36 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "DECA demo_reconstruct",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/preprocess/DECA/demos/demo_reconstruct.py",
+            "console": "integratedTerminal",
+            "args": [
+                "-i", "/mnt/v/Dataset/SplattingAvatar/bala/raw_images", 
+                "--savefolder", "/mnt/v/Dataset/SplattingAvatar/bala/deca",
+                // "--saveDepth", "True", 
+                // "--saveObj", "True",
+                "--saveCode", "True",
+                "--saveVis", "False", 
+                "--sample_step", "1", 
+                "--render_orig", "False",
+            ],
+        },
+    ]
+}
+
+
+
+
