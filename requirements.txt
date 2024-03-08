@@ -1,0 +1,12 @@
+tqdm
+omegaconf
+opencv-python
+libigl
+trimesh
+plyfile
+imageio
+chumpy
+packaging
+pybind11
+lpips
+numpy==1.23.1

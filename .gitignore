@@ -1,0 +1,13 @@
+*.pyc
+*.pyd
+*.egg-info/
+.vscode/
+output
+build
+diff_rasterization/diff_rast.egg-info
+diff_rasterization/dist
+tensorboard_3d
+screenshots
+data/
+model/imavatar/FLAME2020/
+model/simple_phongsurf/3rdparty/

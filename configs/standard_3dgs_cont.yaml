@@ -1,0 +1,52 @@
+dataset:
+  resolution: 1
+
+model:
+  sh_degree: 0 # default: 3
+
+optim:
+  optim_xyz:
+    lr: 0.00032
+    scheduler_args:
+      lr_init: 0.00032
+      lr_final: 0.0000032
+      lr_delay_mult: 0.01
+      lr_max_steps: ${optim.total_iteration}
+  optim_features:
+    lr: 0.0025
+  optim_opacity:
+    lr: 0.05
+  optim_scaling:
+    lr: 0.005
+  optim_rotation:
+    lr: 0.001
+    
+  total_iteration: 10010
+  save_every_iter: 10000
+    
+  densify_from_iter: 2000
+  densification_interval: 500
+  densify_until_iter: 6000
+  opacity_reset_start_iter: 3000
+  opacity_reset_interval: 3000
+  
+  size_threshold: 20
+  densify_grad_threshold: 0.0002
+  min_opacity: 0.005
+  max_n_gauss: 150000
+  
+  offset_start_iter: 400
+  
+  lambda_ssim: 0.2
+  lambda_perceptual: 0.05
+  lambda_scaling: 1.0
+
+  #scheduler:
+  #  milestone: 2000
+  #  decay: 0.33
+
+
+
+
+
+

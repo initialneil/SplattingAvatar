@@ -17,16 +17,44 @@ See the `phongsurface` module implemented in c++ and pybind11.
 <img src="assets/SplattingAvatar-triangle.jpg" width="800"/> 
 
 ## Getting Started
-- Clone [the official 3DGS](https://github.com/graphdeco-inria/gaussian-splatting).
+- Create conda env with pytorch.
 ```
-git clone https://github.com/graphdeco-inria/gaussian-splatting --recursive
+conda create -n splatting python=3.9
+conda activate splatting
+
+# pytorch 1.13.1+cu117 is tested
+pip install torch==1.13.1 torchvision torchaudio functorch --extra-index-url https://download.pytorch.org/whl/cu117
+
+# pytorch3d
+git clone https://github.com/facebookresearch/pytorch3d.git
+cd pytorch3d
+pip install -e .
+
+# install other dependencies
+pip install tqdm omegaconf opencv-python libigl
+pip install trimesh plyfile imageio chumpy lpips
+pip install packaging pybind11
+pip install numpy==1.23.1
 ```
-- Clone this repo.
+
+- Clone this repo *recursively*. Install Gaussian Splatting's submodules.
 ```
-git clone https://github.com/initialneil/SplattingAvatar.git
+git clone --recursive https://github.com/initialneil/SplattingAvatar.git
+cd SplattingAvatar
+
+cd submodules/diff-gaussian-rasterization
+pip install .
+
+cd ../submodules/simple-knn
+pip install .
+
+cd ..
 ```
-- Setup conda env.
+
+- Install `simple_phongsurf` for *walking on triangles*.
 ```
+cd model/simple_phongsurf
+pip install -e .
 ```
 
 - Download [FLAME model](https://flame.is.tue.mpg.de/download.php), choose **FLAME 2020** and unzip it, copy 'generic_model.pkl' into `./model/imavatar/FLAME2020`
@@ -95,4 +123,11 @@ We thanks the following authors for their excellent works!
 - [IMavatar](https://github.com/zhengyuf/IMavatar)
 - [INSTA](https://github.com/Zielon/INSTA)
 
+## License
+SplattingAvatar
+<br>
+The code is released under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode) for Noncommercial use only. Any commercial use should get formal permission first.
 
+[Gaussian Splatting](https://github.com/graphdeco-inria/gaussian-splatting/blob/main/LICENSE.md)
+<br>
+**Inria** and **the Max Planck Institut for Informatik (MPII)** hold all the ownership rights on the *Software* named **gaussian-splatting**. The *Software* is in the process of being registered with the Agence pour la Protection des Programmes (APP).  

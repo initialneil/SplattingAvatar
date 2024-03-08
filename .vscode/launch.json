@@ -12,21 +12,73 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "DECA demo_reconstruct",
+            "name": "tool_show_3dgs_ply",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/preprocess/DECA/demos/demo_reconstruct.py",
+            "program": "${workspaceFolder}/tool_show_3dgs_ply.py",
             "console": "integratedTerminal",
+            "justMyCode": true,
             "args": [
-                "-i", "/mnt/v/Dataset/SplattingAvatar/bala/raw_images", 
-                "--savefolder", "/mnt/v/Dataset/SplattingAvatar/bala/deca",
-                // "--saveDepth", "True", 
-                // "--saveObj", "True",
-                "--saveCode", "True",
-                "--saveVis", "False", 
-                "--sample_step", "1", 
-                "--render_orig", "False",
-            ],
+                "--ply_fn", "V:/PromData/20240222_Dancer_TuTu/D_6/Video_20240221_164758_064/frameset/output-splatting/sh0_iter10000/000005.ply",
+            ]
+        },
+        {
+            "name": "tool_show_3dgs_seq",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/tool_show_3dgs_seq.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--ply_dir", "V:/PromData/20240222_Dancer_TuTu/D_6/Video_20240221_165246_067/frameset/output-splatting/sh0_iter30000",
+                "--sh_degree", "0",
+            ]
+        },
+        {
+            "name": "train_frameset_3dgs",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/train_frameset_3dgs.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--dat_dir", "V:/PromData/20240222_Dancer_TuTu/D_6/Video_20240221_165246_067/frameset/000000",
+                "--configs", "configs/standard_3dgs.yaml",
+                "model.sh_degree=0",
+                "optim.total_iteration=10010", 
+                "optim.save_every_iter=10000",
+                "optim.densify_until_iter=7000",
+                "optim.optim_xyz.scheduler_args.lr_init=0.00016",
+                "optim.optim_xyz.scheduler_args.lr_final=0.0000016",
+                "--model_path", "output-splatting/sh0_iter10000",
+                "--init_gs", "../output-splatting/000000_3dgs.ply",
+            ]
+        },
+        {
+            "name": "train_splatting_avatar",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/train_splatting_avatar.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--config", "configs/splatting_avatar.yaml",
+                "--dat_dir", "V:/Dataset/SplattingAvatar/yufeng",
+                // "--model_path", "output-splatting/last_checkpoint",
+            ]
+        },
+        {
+            "name": "eval_splatting_avatar",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/eval_splatting_avatar.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--config", "configs/splatting_avatar.yaml",
+                "--dat_dir", "V:/Dataset/SplattingAvatar/bala",
+                "--pc_dir", "V:/Dataset/SplattingAvatar/bala/output-splatting/last_checkpoint/point_cloud/iteration_30000",
+            ]
         },
     ]
 }
