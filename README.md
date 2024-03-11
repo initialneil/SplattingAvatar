@@ -82,7 +82,7 @@ SIBR_remoteGaussian_app.exe --path <path/to/model_path>
 SIBR_remoteGaussian_app.exe --path C:\SplattingAvatar\bala\output-splatting\last_checkpoint
 
 # it is recommended to change "FPS" to "Trackball" in the viewer
-# you don't need to chagne the "path" everytime
+# you don't need to change the "path" everytime
 ```
 ## Evaluation
 ```
