@@ -1,5 +1,5 @@
 # [CVPR2024] SplattingAvatar: Realistic Real-Time Human Avatars with Mesh-Embedded Gaussian Splatting
-## [Paper]() | [Video Youtube](https://youtu.be/IzC-fLvdntA) | [Project Page](https://initialneil.github.io/SplattingAvatar)
+## [Paper](https://arxiv.org/abs/2403.05087) | [Video Youtube](https://youtu.be/IzC-fLvdntA) | [Project Page](https://initialneil.github.io/SplattingAvatar)
 
 Official Repository for CVPR 2024 paper [*SplattingAvatar: Realistic Real-Time Human Avatars with Mesh-Embedded Gaussian Splatting*](https://cvpr.thecvf.com/Conferences/2024/AcceptedPapers). 
 
