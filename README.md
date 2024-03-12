@@ -101,6 +101,8 @@ We conducted experiments on PeopleSnapshot.
 python train_splatting_avatar.py --config "configs/splatting_avatar.yaml;configs/instant_avatar.yaml" --dat_dir <path/to/subject>
 # for example:
 python train_splatting_avatar.py --config "configs/splatting_avatar.yaml;configs/instant_avatar.yaml" --dat_dir C:/SplattingAvatar/female-3-casual
+# you may specify gpu id by adding CUDA_VISIBLE_DEVICES=x before calling python:
+CUDA_VISIBLE_DEVICES=0 python train_splatting_avatar.py ...
 ```
 
 ## GPU requirement

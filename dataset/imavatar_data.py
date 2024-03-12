@@ -116,6 +116,7 @@ class IMavatarDataset(torch.utils.data.Dataset):
                            canonical_pose=None)
         self.mesh_py3d = py3d_meshes.Meshes(self.flame.v_template[None, ...].float(), 
                                             torch.from_numpy(self.flame.faces[None, ...].astype(int)))
+        self.cano_mesh = self.get_flame_mesh(0)
 
     ##################################################
     def __len__(self):

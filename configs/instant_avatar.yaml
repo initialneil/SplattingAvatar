@@ -5,7 +5,7 @@ dataset:
   frameset_type: instant_avatar
   
 optim:
-  lambda_scaling: 1.0   # 0.0 for head, 1.0 for instant avatar
+  lambda_scaling: 1.0           # 0.0 for head, 1.0 for instant avatar
   lambda_perceptual: 0.01
   lambda_ssim: 0.0
 

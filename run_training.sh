@@ -1,3 +1,5 @@
+# python train_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir V:/Dataset/SplattingAvatar/bala --model_path output-splatting/last_checkpoint
+# python train_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir V:/Dataset/SplattingAvatar/biden --model_path output-splatting/last_checkpoint
 # python train_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir V:/Dataset/SplattingAvatar/yufeng --model_path output-splatting/last_checkpoint
 # python train_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir V:/Dataset/SplattingAvatar/malte_1 --model_path output-splatting/last_checkpoint
 # python train_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir V:/Dataset/SplattingAvatar/marcel --model_path output-splatting/last_checkpoint
