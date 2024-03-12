@@ -57,8 +57,9 @@ cd model/simple_phongsurf
 pip install -e .
 ```
 
-- Download [FLAME model](https://flame.is.tue.mpg.de/download.php), choose **FLAME 2020** and unzip it, copy 'generic_model.pkl' into `./model/imavatar/FLAME2020`
+- Download [FLAME model](https://flame.is.tue.mpg.de/download.php), choose **FLAME 2020** and unzip it, copy 'generic_model.pkl' into `./model/imavatar/FLAME2020`,
 
+- Download [SMPL model](https://smpl.is.tue.mpg.de/), and put `SMPL_FEMALE.pkl`, `SMPL_MALE.pkl`, `SMPL_NEUTRAL.pkl` into `./model/smplx_utils/smplx_models/smpl`.
 
 ## Preparing dataset
 We provide the preprocessed data of the 10 subjects used in the paper.
@@ -67,7 +68,6 @@ We provide the preprocessed data of the 10 subjects used in the paper.
 - [Google Drive](https://drive.google.com/drive/folders/1YPEG1IYgkZWTlibRZfMjhXFMw58JJVeq?usp=sharing) or [Baidu Disk](https://pan.baidu.com/s/12ycpotyE4KUZ-HvhpCcVxw?pwd=bkfh)
 
 <img src="assets/SplattingAvatar-dataset.jpg" width="800"/> 
-
 
 
 ## Training
@@ -91,9 +91,20 @@ python eval_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir
 python train_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir C:/SplattingAvatar/bala/output-splatting/last_checkpoint
 ```
 
+## Full-body Avatar
+We conducted experiments on PeopleSnapshot.
+- Please download the parameter files (the same with InstantAvatar) from: [Baidu Dick](https://pan.baidu.com/s/166jItS7ZrA3vQ8fRJM63yg?pwd=0imt) or [Google Drive](https://drive.google.com/drive/folders/1r-fHq5Q_szFYD_Wz394Dnc5G79nG2WHw?usp=sharing).
+- Download PeopleSnapshot and unzip `images` and `masks` to corresponding folders from above.
+- Training:
+```
+# override with instant_avatar.yaml for PeopleSnapshot in InstantAvatar's format
+python train_splatting_avatar.py --config "configs/splatting_avatar.yaml;configs/instant_avatar.yaml" --dat_dir <path/to/subject>
+# for example:
+python train_splatting_avatar.py --config "configs/splatting_avatar.yaml;configs/instant_avatar.yaml" --dat_dir C:/SplattingAvatar/female-3-casual
+```
 
 ## GPU requirement
-We conduct our experiments on a single NVIDIA RTX 3090 with 24GB.
+We conducted our experiments on a single NVIDIA RTX 3090 with 24GB.
 Training with less GPU memory can be achieved by setting a maximum number of Gaussians.
 ```
 # in configs/splatting_avatar.yaml
@@ -117,7 +128,7 @@ If you find our code or paper useful, please cite as:
 ```
 
 ## Acknowledgement
-We thanks the following authors for their excellent works!
+We thank the following authors for their excellent works!
 - [instant-nsr-pl](https://github.com/bennyguo/instant-nsr-pl)
 - [Gaussian Splatting](https://github.com/graphdeco-inria/gaussian-splatting)
 - [IMavatar](https://github.com/zhengyuf/IMavatar)

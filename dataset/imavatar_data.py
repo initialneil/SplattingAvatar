@@ -1,12 +1,13 @@
+# IMavatar data Reader.
+# Contributer(s): Neil Z. Shao
+# All rights reserved. Prometheus 2022-2024.
 import os
-import random
 import cv2
 import json
 from copy import deepcopy
 import torch
 import numpy as np
 from scene.dataset_readers import convert_to_scene_cameras
-from arguments import ModelParams
 from model import libcore
 from model.imavatar.flame import FLAME
 import pytorch3d.structures.meshes as py3d_meshes
@@ -57,7 +58,6 @@ class IMavatarDataset(torch.utils.data.Dataset):
         self.split = split
 
         self.dat_dir = config.dat_dir
-        self.frameset_type = config.get('frameset_type', 'color_frames')
         self.cameras_extent = config.get('cameras_extent', 1.0)
         self.num_for_train = config.get('num_for_train', -350)
 

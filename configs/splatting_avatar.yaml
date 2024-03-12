@@ -15,9 +15,14 @@ model:
   xyz_as_uvd: True # use _xyz as variables of uvd
   #max_n_gauss: 300000
 
+pipe:
+  convert_SHs_python: False
+  compute_cov3D_python: False
+  debug: False
+
 optim:
   optim_xyz:
-    lr: 0.00032
+    lr: 0.00016
     scheduler_args:
       lr_init: 0.00016
       lr_final: 0.0000016
@@ -33,7 +38,7 @@ optim:
     lr: 0.001
     
   total_iteration: 30000
-  save_every_iter: 10000
+  save_every_iter: 30000
   testing_iterations: [ 30000 ]
     
   densify_from_iter: 100

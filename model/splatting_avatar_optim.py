@@ -1,3 +1,6 @@
+# SplattingAvatar Optimizer.
+# Contributer(s): Neil Z. Shao
+# All rights reserved. Prometheus 2022-2024.
 import os
 import torch
 import torch.nn as nn
@@ -53,7 +56,7 @@ class SplattingAvatarOptimizer(LossBase):
             })
             l.append({
                 'params': [model._features_rest], 
-                'lr': optimizer_config.optim_features.lr, 
+                'lr': optimizer_config.optim_features.lr / 20.0, 
                 'name': '_features_rest'
             })
 

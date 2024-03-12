@@ -1,3 +1,6 @@
+# The Standard GaussianSplatting Model.
+# Contributer(s): Neil Z. Shao
+# All rights reserved. Prometheus 2022-2024.
 import os
 import torch
 import torch.nn as nn

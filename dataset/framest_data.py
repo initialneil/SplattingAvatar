@@ -1,3 +1,6 @@
+# Frameset Reader.
+# Contributer(s): Neil Z. Shao
+# All rights reserved. Prometheus 2022-2024.
 import os
 import torch
 from scene.dataset_readers import convert_to_scene_cameras

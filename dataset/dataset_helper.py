@@ -1,3 +1,6 @@
+# Dataset helper for Frameset.
+# Contributer(s): Neil Z. Shao
+# All rights reserved. Prometheus 2022-2024.
 import random
 import torch
 from tqdm import tqdm
@@ -15,6 +18,9 @@ def make_frameset_data(dataset_config, split='train', frm_list=None):
     elif dataset_config.frameset_type == 'imavatar':
         from .imavatar_data import IMavatarDataset
         frameset = IMavatarDataset(dataset_config, split=split, frm_list=frm_list)
+    elif dataset_config.frameset_type == 'instant_avatar':
+        from .instant_avatar_reader import InstantAvatarDataset
+        frameset = InstantAvatarDataset(dataset_config, split=split, frm_list=frm_list)
     else:
         raise NotImplementedError
 

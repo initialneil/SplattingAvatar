@@ -109,14 +109,15 @@ class Camera:
         if self.w == width and self.h == height:
             return
 
-        scale = float(width) / self.w
-        self.fx *= scale
-        self.fy *= scale
+        scale_x = float(width) / self.w
+        scale_y = float(height) / self.h
+        self.fx *= scale_x
+        self.fy *= scale_y
 
         dx = self.cx - self.w / 2.0
         dy = self.cy - self.h / 2.0
-        self.cx = width / 2.0 + dx * scale
-        self.cy = height / 2.0 + dy * scale
+        self.cx = width / 2.0 + dx * scale_x
+        self.cy = height / 2.0 + dy * scale_y
 
         self.w = width
         self.h = height

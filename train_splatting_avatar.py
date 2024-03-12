@@ -14,9 +14,9 @@ from dataset.dataset_helper import make_frameset_data, make_dataloader
 from model import libcore
 
 if __name__ == '__main__':
-    parser = ArgumentParser(description="test tetgen")
+    parser = ArgumentParser(description='SplattingAvatar Training')
     pp = PipelineParams(parser)
-    parser.add_argument('--ip', type=str, default="127.0.0.1")
+    parser.add_argument('--ip', type=str, default='127.0.0.1')
     parser.add_argument('--port', type=int, default=6009)
     parser.add_argument('--dat_dir', type=str, required=True)
     parser.add_argument('--configs', type=lambda s: [i for i in s.split(';')], 
@@ -48,8 +48,7 @@ if __name__ == '__main__':
     dataloader = make_dataloader(frameset_train, shuffle=True)
 
     # first frame as canonical
-    first_data = frameset_train.__getitem__(0)
-    cano_mesh = first_data['mesh_info']
+    cano_mesh = frameset_train.cano_mesh
 
     ##################################################
     pipe.compute_cov3D_python = False
@@ -60,8 +59,11 @@ if __name__ == '__main__':
     gs_optim = SplattingAvatarOptimizer(gs_model, config.optim)
 
     ##################################################
-    network_gui.init(args.ip, args.port)
-    verify = args.dat_dir
+    if args.ip != 'none':
+        network_gui.init(args.ip, args.port)
+        verify = args.dat_dir
+    else:
+        verify = None
 
     data_iterator = iter(dataloader)
 
@@ -90,7 +92,8 @@ if __name__ == '__main__':
         gt_image = viewpoint_cam.original_image
         
         # send one image to gui (optional)
-        network_gui.render_to_network(gs_model, pipe, verify, gt_image=gt_image)
+        if args.ip != 'none':
+            network_gui.render_to_network(gs_model, pipe, verify, gt_image=gt_image)
 
         # render
         render_pkg = gs_model.render_to_camera(viewpoint_cam, pipe)

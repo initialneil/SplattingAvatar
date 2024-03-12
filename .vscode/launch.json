@@ -55,7 +55,7 @@
             ]
         },
         {
-            "name": "train_splatting_avatar",
+            "name": "[imavatar] train_splatting_avatar",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/train_splatting_avatar.py",
@@ -78,6 +78,20 @@
                 "--config", "configs/splatting_avatar.yaml",
                 "--dat_dir", "V:/Dataset/SplattingAvatar/bala",
                 "--pc_dir", "V:/Dataset/SplattingAvatar/bala/output-splatting/last_checkpoint/point_cloud/iteration_30000",
+            ]
+        },
+        {
+            "name": "[instant] train_splatting_avatar",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/train_splatting_avatar.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--config", "configs/splatting_avatar.yaml;configs/instant_avatar.yaml",
+                "--dat_dir", "V:/Dataset/PeopleSnapshot/instant_avatar/female-3-casual",
+                // "--model_path", "output-splatting/last_checkpoint",
+                // "--ip", "none",
             ]
         },
     ]

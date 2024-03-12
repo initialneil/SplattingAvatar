@@ -1,3 +1,6 @@
+# The base class for GaussianSplatting Model.
+# Contributer(s): Neil Z. Shao
+# All rights reserved. Prometheus 2022-2024.
 import os
 import numpy as np
 from pathlib import Path
