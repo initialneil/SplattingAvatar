@@ -42,7 +42,7 @@ optim:
   save_every_iter: 30000
   testing_iterations: [ 30000 ]
     
-  densify_from_iter: 500
+  densify_from_iter: 600
   densification_interval: 100
   densify_until_iter: 29_000
   opacity_reset_start_iter: 0
