@@ -132,7 +132,7 @@ class IMavatarDataset(torch.utils.data.Dataset):
 
         frm_idx = int(idx)
 
-        ##########
+        # frames
         color_frames = read_imavatar_frameset(self.dat_dir, self.frames_info[idx], self.intrinsics)
         scene_cameras = convert_to_scene_cameras(color_frames, self.config)
         
@@ -144,7 +144,7 @@ class IMavatarDataset(torch.utils.data.Dataset):
             'cameras_extent': self.cameras_extent,
         }
 
-        ##########
+        # mesh
         batch['mesh_info'] = self.get_flame_mesh(idx)
         return batch
 

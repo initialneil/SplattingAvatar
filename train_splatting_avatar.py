@@ -83,10 +83,6 @@ if __name__ == '__main__':
             batches = next(data_iterator)
 
         batch = batches[0]
-
-        import numpy as np
-        batch = frameset_train.__getitem__(np.where(np.array(frameset_train.frm_list) == 320)[0].item())
-        
         frm_idx = batch['frm_idx']
         scene_cameras = batch['scene_cameras']
 
@@ -102,8 +98,7 @@ if __name__ == '__main__':
             network_gui.render_to_network(gs_model, pipe, verify, gt_image=gt_image)
 
         # render
-        background = [0.3990, 0.5167, 0.0249]
-        render_pkg = gs_model.render_to_camera(viewpoint_cam, pipe, background=background)
+        render_pkg = gs_model.render_to_camera(viewpoint_cam, pipe)
         image = render_pkg['render']
         gt_image = render_pkg['gt_image']
         gt_alpha_mask = render_pkg['gt_alpha_mask']
