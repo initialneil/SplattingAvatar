@@ -44,8 +44,6 @@ class InstantAvatarDataset(torch.utils.data.Dataset):
         self.num_frames = len(self.frm_list)
         print(f'[InstantAvatarDataset][{self.split}] num_frames = {self.num_frames}')
 
-        self.cache_buffer = libcore.CacheBuffer(max_size=config.get('cache_size', 1000))
-
     ##################################################
     # load config.json
     def load_config_file(self):
@@ -169,8 +167,6 @@ class InstantAvatarDataset(torch.utils.data.Dataset):
             idx = torch.randint(0, len(self.frm_list), (1,)).item()
 
         frm_idx = self.frm_list[idx]
-        if self.cache_buffer.haskey(frm_idx):
-            return self.cache_buffer.get(frm_idx)
 
         # frames
         color_frames = read_instant_avatar_frameset(self.dat_dir, frm_idx, self.cam)
@@ -187,7 +183,6 @@ class InstantAvatarDataset(torch.utils.data.Dataset):
         # mesh
         batch['mesh_info'] = self.get_smpl_mesh(idx)
         
-        self.cache_buffer.set(frm_idx, batch)
         return batch
 
     def get_smpl_mesh(self, idx):
