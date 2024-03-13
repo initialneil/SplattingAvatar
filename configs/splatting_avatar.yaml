@@ -13,6 +13,7 @@ model:
   sh_degree: 0 
   num_init_samples: 10000
   xyz_as_uvd: True # use _xyz as variables of uvd
+  with_mesh_scaling: True
   #max_n_gauss: 300000
 
 pipe:
@@ -55,11 +56,12 @@ optim:
   offset_start_iter: 400
   
   lambda_rgb_mse: 10.0
-  lambda_ssim: 0.2
+  lambda_ssim: 0.0
   lambda_perceptual: 0.05
   lambda_scaling: 0.0           # 0.0 for head, 1.0 for instant avatar
   thresh_scaling_max: 0.008
   thresh_scaling_ratio: 10.0
+  lambda_sparsity: 0.0
 
   # triangle walk
   triangle_walk_interval: 100

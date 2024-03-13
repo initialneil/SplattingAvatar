@@ -4,7 +4,6 @@ import numpy as np
 from pathlib import Path
 from random import randint
 from argparse import ArgumentParser
-from arguments import PipelineParams
 from scene.dataset_readers import convert_to_scene_cameras
 from gaussian_renderer import network_gui
 from datetime import datetime
@@ -40,7 +39,6 @@ def sample_pcs(cams, num_pts):
 
 if __name__ == '__main__':
     parser = ArgumentParser(description="test tetgen")
-    pp = PipelineParams(parser)
     parser.add_argument('--ip', type=str, default="127.0.0.1")
     parser.add_argument('--port', type=int, default=6009)
     parser.add_argument('--dat_dir', type=str, required=True)
@@ -49,7 +47,6 @@ if __name__ == '__main__':
     parser.add_argument('--model_path', type=str, default=None)
     parser.add_argument('--init_gs', type=str, default=None, help="initial 3dgs ply")
     args, extras = parser.parse_known_args()
-    pipe = pp.extract(args)
 
     # output dir
     if args.model_path is None:
@@ -92,8 +89,7 @@ if __name__ == '__main__':
     scene_cameras = convert_to_scene_cameras(color_frames)
 
     ##################################################
-    pipe.compute_cov3D_python = False
-    pipe.convert_SHs_python = False
+    pipe = config.pipe
     gs_model = StandardGaussModel(config.model, verbose=True)
 
     if args.init_gs is not None:
