@@ -433,8 +433,31 @@ class SplattingAvatarModel(GaussianBase):
         self.setup_canonical(cano_verts, cano_norms, cano_faces)
 
         self._xyz = torch.tensor(cc['_xyz']).float().to(self.device)
+        if '_rotation' in cc:
+            self._rotation = torch.tensor(cc['_rotation']).float().to(self.device)
         self.sample_fidxs = torch.tensor(cc['sample_fidxs']).long().to(self.device)
         self.sample_bary = torch.tensor(cc['sample_bary']).float().to(self.device)
+
+    def load_from_embedding_v2(self, embed_fn):
+        with open(embed_fn, 'r') as fp:
+            cc = json.load(fp)
+
+        mesh_fn = cc['mesh_fn']
+        if not os.path.isabs(mesh_fn):
+            mesh_fn = str(Path(embed_fn).parent / mesh_fn)
+        
+        cano_mesh = libcore.MeshCpu(mesh_fn)
+        cano_verts = torch.tensor(cano_mesh.V).float().to(self.device)
+        cano_norms = torch.tensor(cano_mesh.N).float().to(self.device)
+        cano_faces = torch.tensor(cano_mesh.F).long().to(self.device)
+        self.setup_canonical(cano_verts, cano_norms, cano_faces)
+
+        self._xyz = torch.tensor(cc['_xyz']).float().to(self.device)
+        self._rotation = torch.tensor(cc['_rotation']).float().to(self.device)
+        self.sample_fidxs = torch.tensor(cc['sample_fidxs']).long().to(self.device)
+        self.sample_bary = torch.tensor(cc['_sample_bary']).float().to(self.device)
+
+        self.save_embedding_json(embed_fn.replace('canonical.sample.json', 'embedding.json'))
         
     def save_embedding_json(self, embed_fn):
         obj_fn = embed_fn.replace('.json', '.obj')
@@ -450,6 +473,7 @@ class SplattingAvatarModel(GaussianBase):
             'sample_fidxs': self.sample_fidxs.detach().cpu().tolist(),
             'sample_bary': self.sample_bary.detach().cpu().tolist(),
             '_xyz': self._xyz.detach().cpu().tolist(),
+            '_rotation': self._rotation.detach().cpu().tolist(),
         }
 
         with open(os.path.join(embed_fn), 'w') as f:

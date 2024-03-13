@@ -1,6 +1,5 @@
 import os
 from argparse import ArgumentParser
-from arguments import PipelineParams
 from model.splatting_avatar_model import SplattingAvatarModel
 from model.loss_base import run_testing
 from dataset.dataset_helper import make_frameset_data, make_dataloader
@@ -8,7 +7,6 @@ from model import libcore
 
 if __name__ == '__main__':
     parser = ArgumentParser(description='SplattingAvatar Evaluation')
-    pp = PipelineParams(parser)
     parser.add_argument('--ip', type=str, default='127.0.0.1')
     parser.add_argument('--port', type=int, default=6009)
     parser.add_argument('--dat_dir', type=str, required=True)
@@ -16,7 +14,6 @@ if __name__ == '__main__':
                         required=True, help='path to config file')
     parser.add_argument('--pc_dir', type=str, default=None)
     args, extras = parser.parse_known_args()
-    pipe = pp.extract(args)
 
     # load model and training config
     config = libcore.load_from_config(args.configs, cli_args=extras)
@@ -26,8 +23,7 @@ if __name__ == '__main__':
     frameset_test = make_frameset_data(config.dataset, split='test')
 
     ##################################################
-    pipe.compute_cov3D_python = False
-    pipe.convert_SHs_python = False
+    pipe = config.pipe
     gs_model = SplattingAvatarModel(config.model, verbose=True)
 
     ply_fn = os.path.join(args.pc_dir, 'point_cloud.ply')
