@@ -59,11 +59,12 @@ class IMavatarDataset(torch.utils.data.Dataset):
 
         self.dat_dir = config.dat_dir
         self.cameras_extent = config.get('cameras_extent', 1.0)
+
         self.num_for_train = config.get('num_for_train', -350)
 
         self.load_flame_json()
         self.num_frames = len(self.frm_list)
-        print(f'[IMavatarDataset] num_frames = {self.num_frames}')
+        print(f'[IMavatarDataset][{self.split}] num_frames = {self.num_frames}')
 
     ##################################################
     # load flame_params.json
@@ -116,7 +117,6 @@ class IMavatarDataset(torch.utils.data.Dataset):
                            canonical_pose=None)
         self.mesh_py3d = py3d_meshes.Meshes(self.flame.v_template[None, ...].float(), 
                                             torch.from_numpy(self.flame.faces[None, ...].astype(int)))
-        self.cano_mesh = self.get_flame_mesh(0)
 
     ##################################################
     def __len__(self):
@@ -128,7 +128,7 @@ class IMavatarDataset(torch.utils.data.Dataset):
 
         frm_idx = int(idx)
 
-        ##########
+        # frames
         color_frames = read_imavatar_frameset(self.dat_dir, self.frames_info[idx], self.intrinsics)
         scene_cameras = convert_to_scene_cameras(color_frames, self.config)
         
@@ -140,7 +140,7 @@ class IMavatarDataset(torch.utils.data.Dataset):
             'cameras_extent': self.cameras_extent,
         }
 
-        ##########
+        # mesh
         batch['mesh_info'] = self.get_flame_mesh(idx)
         return batch
 

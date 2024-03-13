@@ -38,7 +38,7 @@ class InstantAvatarDataset(torch.utils.data.Dataset):
         self.load_camera_file()
         self.load_pose_file()
         self.num_frames = len(self.frm_list)
-        print(f'[InstantAvatarDataset] num_frames = {self.num_frames}')
+        print(f'[InstantAvatarDataset][{self.split}] num_frames = {self.num_frames}')
 
     ##################################################
     # load config.json
@@ -109,11 +109,6 @@ class InstantAvatarDataset(torch.utils.data.Dataset):
         # so init with only one batch of verts and use update_padded later
         self.mesh_py3d = py3d_meshes.Meshes(out['vertices'][:1], 
                                             torch.tensor(self.smpl_model.faces[None, ...].astype(int)))
-        self.cano_mesh = {
-            'mesh_verts': self.mesh_py3d.verts_packed().detach().clone(),
-            'mesh_norms': self.mesh_py3d.verts_normals_packed().detach().clone(),
-            'mesh_faces': self.mesh_py3d.faces_packed().detach().clone(),
-        }
 
         # load refined
         refine_fn = os.path.join(self.dat_dir, f"poses/anim_nerf_{self.split}.npz")
@@ -145,7 +140,7 @@ class InstantAvatarDataset(torch.utils.data.Dataset):
 
         frm_idx = self.frm_list[idx]
 
-        ##########
+        # frames
         color_frames = read_instant_avatar_frameset(self.dat_dir, frm_idx, self.cam)
         scene_cameras = convert_to_scene_cameras(color_frames, self.config)
         
@@ -157,8 +152,9 @@ class InstantAvatarDataset(torch.utils.data.Dataset):
             'cameras_extent': self.cameras_extent,
         }
 
-        ##########
+        # mesh
         batch['mesh_info'] = self.get_smpl_mesh(idx)
+        
         return batch
 
     def get_smpl_mesh(self, idx):

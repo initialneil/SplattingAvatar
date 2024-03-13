@@ -107,8 +107,11 @@ class SplattingAvatarModel(GaussianBase):
 
     @property
     def get_scaling(self):
-        scaling_alter = self._face_scaling[self.sample_fidxs]
-        return self.scaling_activation(self._scaling * scaling_alter)
+        if self.config.with_mesh_scaling:
+            scaling_alter = self._face_scaling[self.sample_fidxs]
+            return self.scaling_activation(self._scaling * scaling_alter)
+        else:
+            return self.scaling_activation(self._scaling)
 
     @property
     def get_features(self):
@@ -166,6 +169,7 @@ class SplattingAvatarModel(GaussianBase):
         # use _xyz as variables for uvd
         # enabling uvd representation of SplattingAvatar
         self.config.xyz_as_uvd = self.config.get('xyz_as_uvd', True)
+        self.config.with_mesh_scaling = config.get('with_mesh_scaling', False)
 
     def create_from_pcd(self, pcd : BasicPointCloud):
         fused_point_cloud = torch.tensor(np.asarray(pcd.points)).float().to(self.device)
@@ -204,7 +208,7 @@ class SplattingAvatarModel(GaussianBase):
         self.phongsurf = PhongSurfacePy3d(cano_verts, cano_faces, cano_norms,
                                           outer_loop=2, inner_loop=50, method='uvd').to(self.device)
 
-    def create_from_canonical(self, cano_mesh):
+    def create_from_canonical(self, cano_mesh, sample_fidxs=None, sample_bary=None):
         cano_verts = cano_mesh['mesh_verts'].float().to(self.device)
         cano_norms = cano_mesh['mesh_norms'].float().to(self.device)
         cano_faces = cano_mesh['mesh_faces'].long().to(self.device)
@@ -213,8 +217,9 @@ class SplattingAvatarModel(GaussianBase):
         self.mesh_norms = self.cano_norms
         
         # sample on mesh
-        num_samples = self.config.get('num_init_samples', 10000)
-        sample_fidxs, sample_bary = sample_bary_on_triangles(cano_faces.shape[0], num_samples)
+        if sample_fidxs is None or sample_bary is None:
+            num_samples = self.config.get('num_init_samples', 10000)
+            sample_fidxs, sample_bary = sample_bary_on_triangles(cano_faces.shape[0], num_samples)
         self.sample_fidxs = sample_fidxs.to(self.device)
         self.sample_bary = sample_bary.to(self.device)
 

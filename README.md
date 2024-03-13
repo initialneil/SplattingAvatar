@@ -76,6 +76,11 @@ python train_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_di
 # for example:
 python train_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir C:/SplattingAvatar/bala
 
+# you may specify gpu id by adding CUDA_VISIBLE_DEVICES=x before calling python:
+CUDA_VISIBLE_DEVICES=0 python train_splatting_avatar.py ...
+# to disable network_gui, set ip to 'none'
+CUDA_VISIBLE_DEVICES=0 python train_splatting_avatar.py ... --ip none
+
 # use SIBR_remoteGaussian_app.exe from 3DGS to watch the training
 SIBR_remoteGaussian_app.exe --path <path/to/model_path>
 # for example:
@@ -92,17 +97,15 @@ python train_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_di
 ```
 
 ## Full-body Avatar
-We conducted experiments on PeopleSnapshot.
-- Please download the parameter files (the same with InstantAvatar) from: [Baidu Dick](https://pan.baidu.com/s/166jItS7ZrA3vQ8fRJM63yg?pwd=0imt) or [Google Drive](https://drive.google.com/drive/folders/1r-fHq5Q_szFYD_Wz394Dnc5G79nG2WHw?usp=sharing).
-- Download PeopleSnapshot and unzip `images` and `masks` to corresponding folders from above.
+We conducted experiments on [PeopleSnapshot](https://graphics.tu-bs.de/people-snapshot).
+- Please download the parameter files (the same with InstantAvatar) from: [Baidu Dick](https://pan.baidu.com/s/1g4lSPAYfwbOadnnEDoWjzg?pwd=5gy5) or [Google Drive](https://drive.google.com/drive/folders/1r-fHq5Q_szFYD_Wz394Dnc5G79nG2WHw?usp=sharing).
+- Download 4 sequences from PeopleSnapshot (male/female-3/4-casual) and unzip `images` and `masks` to corresponding folders from above.
 - Training:
 ```
 # override with instant_avatar.yaml for PeopleSnapshot in InstantAvatar's format
 python train_splatting_avatar.py --config "configs/splatting_avatar.yaml;configs/instant_avatar.yaml" --dat_dir <path/to/subject>
 # for example:
 python train_splatting_avatar.py --config "configs/splatting_avatar.yaml;configs/instant_avatar.yaml" --dat_dir C:/SplattingAvatar/female-3-casual
-# you may specify gpu id by adding CUDA_VISIBLE_DEVICES=x before calling python:
-CUDA_VISIBLE_DEVICES=0 python train_splatting_avatar.py ...
 ```
 
 ## GPU requirement

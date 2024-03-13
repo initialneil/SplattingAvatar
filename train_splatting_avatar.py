@@ -2,7 +2,6 @@ import os
 from pathlib import Path
 from random import randint
 from argparse import ArgumentParser
-from arguments import PipelineParams
 from gaussian_renderer import network_gui
 from datetime import datetime
 from tqdm import tqdm
@@ -15,7 +14,6 @@ from model import libcore
 
 if __name__ == '__main__':
     parser = ArgumentParser(description='SplattingAvatar Training')
-    pp = PipelineParams(parser)
     parser.add_argument('--ip', type=str, default='127.0.0.1')
     parser.add_argument('--port', type=int, default=6009)
     parser.add_argument('--dat_dir', type=str, required=True)
@@ -23,7 +21,6 @@ if __name__ == '__main__':
                         required=True, help='path to config file')
     parser.add_argument('--model_path', type=str, default=None)
     args, extras = parser.parse_known_args()
-    pipe = pp.extract(args)
 
     # output dir
     if args.model_path is None:
@@ -48,11 +45,11 @@ if __name__ == '__main__':
     dataloader = make_dataloader(frameset_train, shuffle=True)
 
     # first frame as canonical
-    cano_mesh = frameset_train.cano_mesh
+    first_batch = frameset_train.__getitem__(0)
+    cano_mesh = first_batch['mesh_info']
 
     ##################################################
-    pipe.compute_cov3D_python = False
-    pipe.convert_SHs_python = False
+    pipe = config.pipe
     gs_model = SplattingAvatarModel(config.model, verbose=True)
     gs_model.create_from_canonical(cano_mesh)
 
@@ -80,6 +77,7 @@ if __name__ == '__main__':
         except:
             data_iterator = iter(dataloader)
             batches = next(data_iterator)
+
         batch = batches[0]
         frm_idx = batch['frm_idx']
         scene_cameras = batch['scene_cameras']
@@ -100,6 +98,11 @@ if __name__ == '__main__':
         image = render_pkg['render']
         gt_image = render_pkg['gt_image']
         gt_alpha_mask = render_pkg['gt_alpha_mask']
+
+        # ### debug ###
+        # from model import libcore
+        # libcore.write_tensor_image(os.path.join('e:/dummy/gt_image.jpg'), gt_image, rgb2bgr=True)
+        # libcore.write_tensor_image(os.path.join('e:/dummy/render.jpg'), image, rgb2bgr=True)
 
         # loss
         loss = gs_optim.collect_loss(gt_image, image, gt_alpha_mask=gt_alpha_mask)

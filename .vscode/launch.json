@@ -64,7 +64,6 @@
             "args": [
                 "--config", "configs/splatting_avatar.yaml",
                 "--dat_dir", "V:/Dataset/SplattingAvatar/yufeng",
-                // "--model_path", "output-splatting/last_checkpoint",
             ]
         },
         {
@@ -90,8 +89,7 @@
             "args": [
                 "--config", "configs/splatting_avatar.yaml;configs/instant_avatar.yaml",
                 "--dat_dir", "V:/Dataset/PeopleSnapshot/instant_avatar/female-3-casual",
-                // "--model_path", "output-splatting/last_checkpoint",
-                // "--ip", "none",
+                "--ip", "none",
             ]
         },
     ]

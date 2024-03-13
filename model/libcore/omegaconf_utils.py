@@ -32,9 +32,9 @@ def load_config(*yaml_files, cli_args=[]):
     cli_conf = OmegaConf.from_cli(cli_args)
     conf = OmegaConf.merge(*yaml_confs, cli_conf)
     OmegaConf.resolve(conf)
-    conf.yaml_confs = yaml_confs
+    # conf.yaml_confs = yaml_confs
     conf.yaml_dir = str(Path(yaml_files[0]).parent).replace('\\', '/')
-    conf.yaml_dirs = [str(Path(fn).parent).replace('\\', '/') for fn in yaml_files]
+    # conf.yaml_dirs = [str(Path(fn).parent).replace('\\', '/') for fn in yaml_files]
     return conf
 
 def load_from_config(yaml_files, dat_dir=None, cli_args=[]):
