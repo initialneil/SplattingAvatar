@@ -34,11 +34,15 @@ class InstantAvatarDataset(torch.utils.data.Dataset):
         self.dat_dir = config.dat_dir
         self.cameras_extent = config.get('cameras_extent', 1.0)
 
+        self.cano_mesh = None
+        self.sample_fidxs = None
+        self.sample_bary = None
+
         self.load_config_file()
         self.load_camera_file()
         self.load_pose_file()
         self.num_frames = len(self.frm_list)
-        print(f'[InstantAvatarDataset] num_frames = {self.num_frames}')
+        print(f'[InstantAvatarDataset][{self.split}] num_frames = {self.num_frames}')
 
     ##################################################
     # load config.json
@@ -109,11 +113,30 @@ class InstantAvatarDataset(torch.utils.data.Dataset):
         # so init with only one batch of verts and use update_padded later
         self.mesh_py3d = py3d_meshes.Meshes(out['vertices'][:1], 
                                             torch.tensor(self.smpl_model.faces[None, ...].astype(int)))
-        self.cano_mesh = {
-            'mesh_verts': self.mesh_py3d.verts_packed().detach().clone(),
-            'mesh_norms': self.mesh_py3d.verts_normals_packed().detach().clone(),
-            'mesh_faces': self.mesh_py3d.faces_packed().detach().clone(),
-        }
+
+        # given initial samples
+        cano_fn = os.path.join(self.dat_dir, 'canonical.sample.json')
+        if os.path.exists(cano_fn):
+            with open(cano_fn) as f:
+                    cano_info = json.load(f)
+
+            mesh_fn = cano_info['mesh_fn']
+            mesh = libcore.MeshCpu(os.path.join(self.dat_dir, mesh_fn))
+
+            self.cano_mesh = {
+                'mesh_verts': torch.tensor(mesh.V).float(),
+                'mesh_norms': torch.tensor(mesh.N).float(),
+                'mesh_faces': torch.tensor(mesh.F).long(),
+            }
+            self.sample_fidxs = torch.tensor(cano_info['sample_fidxs']).long()
+            self.sample_bary = torch.tensor(cano_info['sample_bary'])
+        else:
+            self.cano_mesh = {
+                'mesh_verts': self.mesh_py3d.verts_packed().detach().clone(),
+                'mesh_norms': self.mesh_py3d.verts_normals_packed().detach().clone(),
+                'mesh_faces': self.mesh_py3d.faces_packed().detach().clone(),
+            }
+            self.sample_fidxs, self.sample_bary = None, None
 
         # load refined
         refine_fn = os.path.join(self.dat_dir, f"poses/anim_nerf_{self.split}.npz")

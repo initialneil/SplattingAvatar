@@ -41,6 +41,9 @@ class LossBase(torch.nn.Module):
                 Llpips = self.lpips(gt_image, image).squeeze()
             loss += self.optimizer_config.lambda_perceptual * Llpips
 
+        if self.optimizer_config.get('lambda_sparsity', 0) > 0:
+            loss += self.optimizer_config.lambda_sparsity * self.gs_model.get_opacity.mean()
+
         if self.optimizer_config.get('lambda_scaling', 0) > 0:
             thresh_scaling_max = self.optimizer_config.get('thresh_scaling_max', 0.008)
             thresh_scaling_ratio = self.optimizer_config.get('thresh_scaling_ratio', 10.0)

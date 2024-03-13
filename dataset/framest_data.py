@@ -28,7 +28,7 @@ class FramesetDataset(torch.utils.data.Dataset):
         else:
             self.frm_list = frm_list
         self.num_frames = len(self.frm_list)
-        print(f'[FramesetDataset] num_frames = {self.num_frames}')
+        print(f'[FramesetDataset][{self.split}] num_frames = {self.num_frames}')
 
         self.dat_dir = config.dat_dir
         self.verbose_timer = config.get('verbose_timer', False)

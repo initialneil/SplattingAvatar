@@ -59,11 +59,15 @@ class IMavatarDataset(torch.utils.data.Dataset):
 
         self.dat_dir = config.dat_dir
         self.cameras_extent = config.get('cameras_extent', 1.0)
+
         self.num_for_train = config.get('num_for_train', -350)
+        self.cano_mesh = None
+        self.sample_fidx = None
+        self.sample_bary = None
 
         self.load_flame_json()
         self.num_frames = len(self.frm_list)
-        print(f'[IMavatarDataset] num_frames = {self.num_frames}')
+        print(f'[IMavatarDataset][{self.split}] num_frames = {self.num_frames}')
 
     ##################################################
     # load flame_params.json

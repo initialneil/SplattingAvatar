@@ -49,12 +49,13 @@ if __name__ == '__main__':
 
     # first frame as canonical
     cano_mesh = frameset_train.cano_mesh
+    sample_fidxs, sample_bary = frameset_train.sample_fidxs, frameset_train.sample_bary
 
     ##################################################
     pipe.compute_cov3D_python = False
     pipe.convert_SHs_python = False
     gs_model = SplattingAvatarModel(config.model, verbose=True)
-    gs_model.create_from_canonical(cano_mesh)
+    gs_model.create_from_canonical(cano_mesh, sample_fidxs=sample_fidxs, sample_bary=sample_bary)
 
     gs_optim = SplattingAvatarOptimizer(gs_model, config.optim)
 
@@ -80,7 +81,12 @@ if __name__ == '__main__':
         except:
             data_iterator = iter(dataloader)
             batches = next(data_iterator)
+
         batch = batches[0]
+
+        import numpy as np
+        batch = frameset_train.__getitem__(np.where(np.array(frameset_train.frm_list) == 320)[0].item())
+        
         frm_idx = batch['frm_idx']
         scene_cameras = batch['scene_cameras']
 
@@ -96,10 +102,16 @@ if __name__ == '__main__':
             network_gui.render_to_network(gs_model, pipe, verify, gt_image=gt_image)
 
         # render
-        render_pkg = gs_model.render_to_camera(viewpoint_cam, pipe)
+        background = [0.3990, 0.5167, 0.0249]
+        render_pkg = gs_model.render_to_camera(viewpoint_cam, pipe, background=background)
         image = render_pkg['render']
         gt_image = render_pkg['gt_image']
         gt_alpha_mask = render_pkg['gt_alpha_mask']
+
+        # ### debug ###
+        # from model import libcore
+        # libcore.write_tensor_image(os.path.join('e:/dummy/gt_image.jpg'), gt_image, rgb2bgr=True)
+        # libcore.write_tensor_image(os.path.join('e:/dummy/render.jpg'), image, rgb2bgr=True)
 
         # loss
         loss = gs_optim.collect_loss(gt_image, image, gt_alpha_mask=gt_alpha_mask)
