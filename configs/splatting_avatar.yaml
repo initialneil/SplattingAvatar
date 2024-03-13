@@ -61,7 +61,7 @@ optim:
   lambda_scaling: 0.0           # 0.0 for head, 1.0 for instant avatar
   thresh_scaling_max: 0.008
   thresh_scaling_ratio: 10.0
-  lambda_sparsity: 0.0
+  lambda_sparsity: 0.0001
 
   # triangle walk
   triangle_walk_interval: 100

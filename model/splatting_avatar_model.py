@@ -169,6 +169,7 @@ class SplattingAvatarModel(GaussianBase):
         # use _xyz as variables for uvd
         # enabling uvd representation of SplattingAvatar
         self.config.xyz_as_uvd = self.config.get('xyz_as_uvd', True)
+        self.config.with_mesh_scaling = config.get('with_mesh_scaling', False)
 
     def create_from_pcd(self, pcd : BasicPointCloud):
         fused_point_cloud = torch.tensor(np.asarray(pcd.points)).float().to(self.device)
