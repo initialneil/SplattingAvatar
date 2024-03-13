@@ -42,16 +42,15 @@ optim:
   save_every_iter: 30000
   testing_iterations: [ 30000 ]
     
-  densify_from_iter: 100
+  densify_from_iter: 500
   densification_interval: 100
-  densify_until_iter: 15000
+  densify_until_iter: 29_000
   opacity_reset_start_iter: 0
   opacity_reset_interval: 3000
   
   size_threshold: 20
   densify_grad_threshold: 0.0002
   min_opacity: 0.005
-  max_n_gauss: 150000
   
   offset_start_iter: 400
   
@@ -61,7 +60,7 @@ optim:
   lambda_scaling: 0.0           # 0.0 for head, 1.0 for instant avatar
   thresh_scaling_max: 0.008
   thresh_scaling_ratio: 10.0
-  lambda_sparsity: 0.0001
+  lambda_sparsity: 0.0
 
   # triangle walk
   triangle_walk_interval: 100
