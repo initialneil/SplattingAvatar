@@ -52,8 +52,6 @@ optim:
   densify_grad_threshold: 0.0002
   min_opacity: 0.005
   
-  offset_start_iter: 400
-  
   lambda_rgb_mse: 10.0
   lambda_ssim: 0.0
   lambda_perceptual: 0.01
