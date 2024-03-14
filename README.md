@@ -59,7 +59,11 @@ pip install -e .
 
 - Download [FLAME model](https://flame.is.tue.mpg.de/download.php), choose **FLAME 2020** and unzip it, copy 'generic_model.pkl' into `./model/imavatar/FLAME2020`,
 
-- Download [SMPL model](https://smpl.is.tue.mpg.de/), and put `SMPL_FEMALE.pkl`, `SMPL_MALE.pkl`, `SMPL_NEUTRAL.pkl` into `./model/smplx_utils/smplx_models/smpl`.
+- Download [SMPL model](https://smpl.is.tue.mpg.de/download.php) (1.0.0 for Python 2.7 (10 shape PCs)) and move them to the corresponding places:
+```
+mv /path/to/smpl/models/basicModel_f_lbs_10_207_0_v1.0.0.pkl model/smplx_utils/smplx_models/smpl/SMPL_FEMALE.pkl
+mv /path/to/smpl/models/basicmodel_m_lbs_10_207_0_v1.0.0.pkl model/smplx_utils/smplx_models/smpl/SMPL_MALE.pkl
+```
 
 ## Preparing dataset
 We provide the preprocessed data of the 10 subjects used in the paper.
