@@ -78,7 +78,7 @@ We provide the preprocessed data of the 10 subjects used in the paper.
 ```
 python train_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir <path/to/subject>
 # for example:
-python train_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir C:/SplattingAvatar/bala
+python train_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir /path-to/bala
 
 # you may specify gpu id by adding CUDA_VISIBLE_DEVICES=x before calling python:
 CUDA_VISIBLE_DEVICES=0 python train_splatting_avatar.py ...
@@ -97,7 +97,7 @@ SIBR_remoteGaussian_app.exe --path C:\SplattingAvatar\bala\output-splatting\last
 ```
 python eval_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir <path/to/model_path>
 # for example:
-python train_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir C:/SplattingAvatar/bala/output-splatting/last_checkpoint
+python eval_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir /path-to/bala/output-splatting/last_checkpoint
 ```
 
 ## Full-body Avatar
@@ -110,7 +110,11 @@ We conducted experiments on [PeopleSnapshot](https://graphics.tu-bs.de/people-sn
 # override with instant_avatar.yaml for PeopleSnapshot in InstantAvatar's format
 python train_splatting_avatar.py --config "configs/splatting_avatar.yaml;configs/instant_avatar.yaml" --dat_dir <path/to/subject>
 # for example:
-python train_splatting_avatar.py --config "configs/splatting_avatar.yaml;configs/instant_avatar.yaml" --dat_dir C:/SplattingAvatar/female-3-casual
+python train_splatting_avatar.py --config "configs/splatting_avatar.yaml;configs/instant_avatar.yaml" --dat_dir /path-to/female-3-casual
+
+# pretrained checkpoints provided in `output-splatting/last_checkpoint` can be evaluated by `eval_splatting_avatar.py`
+# for example:
+python eval_splatting_avatar.py --config "configs/splatting_avatar.yaml;configs/instant_avatar.yaml" --dat_dir /path-to/female-3-casual --pc_dir /path-to/female-3-casual/output-splatting/last_checkpoint/point_cloud/iteration_30000
 ```
 
 ## GPU requirement
