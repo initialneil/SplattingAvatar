@@ -67,7 +67,7 @@
             ]
         },
         {
-            "name": "eval_splatting_avatar",
+            "name": "[imavatar] eval_splatting_avatar",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/eval_splatting_avatar.py",
@@ -90,6 +90,19 @@
                 "--config", "configs/splatting_avatar.yaml;configs/instant_avatar.yaml",
                 "--dat_dir", "V:/Dataset/PeopleSnapshot/instant_avatar/female-3-casual",
                 "--ip", "none",
+            ]
+        },
+        {
+            "name": "[instant] eval_splatting_avatar",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/eval_splatting_avatar.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--config", "configs/splatting_avatar.yaml;configs/instant_avatar.yaml",
+                "--dat_dir", "V:/Dataset/PeopleSnapshot/instant_avatar/female-4-casual",
+                "--pc_dir", "V:/Dataset/PeopleSnapshot/instant_avatar/female-4-casual/output-splatting/last_checkpoint/point_cloud/iteration_30000",
             ]
         },
     ]
