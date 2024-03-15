@@ -1,0 +1,53 @@
+name: splattingavatar
+channels:
+  - defaults
+dependencies:
+  - ca-certificates=2023.12.12=haa95532_0
+  - openssl=3.0.13=h2bbff1b_0
+  - pip=23.3.1=py39haa95532_0
+  - python=3.9.18=h1aa4202_0
+  - setuptools=68.2.2=py39haa95532_0
+  - sqlite=3.41.2=h2bbff1b_0
+  - tzdata=2024a=h04d1e81_0
+  - vc=14.2=h21ff451_1
+  - vs2015_runtime=14.27.29016=h5e58377_2
+  - wheel=0.41.2=py39haa95532_0
+  - pip:
+    - antlr4-python3-runtime==4.9.3
+    - certifi==2024.2.2
+    - charset-normalizer==3.3.2
+    - chumpy==0.70
+    - colorama==0.4.6
+    - diff-gaussian-rasterization==0.0.0
+    - functorch==1.13.1
+    - fvcore==0.1.5.post20221221
+    - idna==3.6
+    - imageio==2.34.0
+    - iopath==0.1.10
+    - libigl==2.5.0
+    - lpips==0.1.4
+    - numpy==1.23.1
+    - omegaconf==2.3.0
+    - opencv-python==4.9.0.80
+    - packaging==23.2
+    - pillow==10.2.0
+    - plyfile==1.0.3
+    - portalocker==2.8.2
+    - pybind11==2.11.1
+    - pywin32==306
+    - pyyaml==6.0.1
+    - requests==2.31.0
+    - scipy==1.12.0
+    - simple-knn==0.0.0
+    - six==1.16.0
+    - tabulate==0.9.0
+    - termcolor==2.4.0
+    - torch==1.13.1+cu117
+    - torchaudio==0.13.1+cu117
+    - torchvision==0.14.1+cu117
+    - tqdm==4.66.2
+    - trimesh==4.1.8
+    - typing-extensions==4.10.0
+    - urllib3==2.2.1
+    - yacs==0.1.8
+
