@@ -3,6 +3,7 @@ from argparse import ArgumentParser
 from model.splatting_avatar_model import SplattingAvatarModel
 from model.loss_base import run_testing
 from dataset.dataset_helper import make_frameset_data, make_dataloader
+from gaussian_renderer import network_gui
 from model import libcore
 
 if __name__ == '__main__':
@@ -24,15 +25,22 @@ if __name__ == '__main__':
 
     ##################################################
     pipe = config.pipe
+    
     gs_model = SplattingAvatarModel(config.model, verbose=True)
-
     ply_fn = os.path.join(args.pc_dir, 'point_cloud.ply')
     gs_model.load_ply(ply_fn)
     embed_fn = os.path.join(args.pc_dir, 'embedding.json')
     gs_model.load_from_embedding(embed_fn)
 
     ##################################################
-    run_testing(pipe, frameset_test, gs_model, args.pc_dir)
+    if args.ip != 'none':
+        network_gui.init(args.ip, args.port)
+        verify = args.dat_dir
+    else:
+        verify = None
+
+    ##################################################
+    run_testing(pipe, frameset_test, gs_model, args.pc_dir, verify=verify)
 
     print('[done]')
 

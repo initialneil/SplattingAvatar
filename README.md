@@ -115,6 +115,9 @@ python train_splatting_avatar.py --config "configs/splatting_avatar.yaml;configs
 # pretrained checkpoints provided in `output-splatting/last_checkpoint` can be evaluated by `eval_splatting_avatar.py`
 # for example:
 python eval_splatting_avatar.py --config "configs/splatting_avatar.yaml;configs/instant_avatar.yaml" --dat_dir /path-to/female-3-casual --pc_dir /path-to/female-3-casual/output-splatting/last_checkpoint/point_cloud/iteration_30000
+
+# to animate to noval pose `aist_demo.npz`
+python eval_splatting_avatar.py --config "configs/splatting_avatar.yaml;configs/instant_avatar.yaml" --dat_dir /path-to/female-3-casual --pc_dir /path-to/female-3-casual/output-splatting/last_checkpoint/point_cloud/iteration_30000 --anim_fn /path-to/aist_demo.npz
 ```
 
 ## GPU requirement

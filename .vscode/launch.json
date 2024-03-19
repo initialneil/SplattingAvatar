@@ -105,6 +105,21 @@
                 "--pc_dir", "V:/Dataset/PeopleSnapshot/instant_avatar/female-4-casual/output-splatting/last_checkpoint/point_cloud/iteration_30000",
             ]
         },
+        {
+            "name": "[instant] eval_animate",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/eval_animate.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--config", "configs/splatting_avatar.yaml;configs/instant_avatar.yaml",
+                "--dat_dir", "V:/Dataset/PeopleSnapshot/instant_avatar/female-4-casual",
+                "--pc_dir", "V:/Dataset/PeopleSnapshot/instant_avatar/female-4-casual/output-splatting/last_checkpoint/point_cloud/iteration_30000",
+                "--anim_fn", "V:/Dataset/PeopleSnapshot/instant_avatar/aist_demo/aist_demo.npz",
+                "--ip", "none",
+            ]
+        },
     ]
 }
 
