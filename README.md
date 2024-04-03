@@ -102,7 +102,7 @@ python eval_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_dir
 
 ## Full-body Avatar
 We conducted experiments on [PeopleSnapshot](https://graphics.tu-bs.de/people-snapshot).
-- Please download the parameter files (the same with InstantAvatar) from: [Baidu Dick](https://pan.baidu.com/s/1g4lSPAYfwbOadnnEDoWjzg?pwd=5gy5) or [Google Drive](https://drive.google.com/drive/folders/1r-fHq5Q_szFYD_Wz394Dnc5G79nG2WHw?usp=sharing).
+- Please download the parameter files (the same with InstantAvatar) from: [Baidu Disk](https://pan.baidu.com/s/1g4lSPAYfwbOadnnEDoWjzg?pwd=5gy5) or [Google Drive](https://drive.google.com/drive/folders/1r-fHq5Q_szFYD_Wz394Dnc5G79nG2WHw?usp=sharing).
 - Download 4 sequences from PeopleSnapshot (male/female-3/4-casual) and unzip `images` and `masks` to corresponding folders from above.
 - Use `scripts/preprocess_PeopleSnapshot.py` to preprocess the data.
 - Training:
