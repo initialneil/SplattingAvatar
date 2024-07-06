@@ -136,10 +136,10 @@ python train_splatting_avatar.py --config configs/splatting_avatar.yaml --dat_di
 ## Citation
 If you find our code or paper useful, please cite as:
 ```
-@inproceedings{SplattingAvatar:CVPR2024,
+@inproceedings{shao2024splattingavatar,
   title = {{SplattingAvatar: Realistic Real-Time Human Avatars with Mesh-Embedded Gaussian Splatting}},
   author = {Shao, Zhijing and Wang, Zhaolong and Li, Zhuang and Wang, Duotun and Lin, Xiangru and Zhang, Yu and Fan, Mingming and Wang, Zeyu},
-  booktitle = {Computer Vision and Pattern Recognition (CVPR)},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   year = {2024}
 }
 ```
